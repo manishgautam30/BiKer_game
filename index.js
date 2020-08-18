@@ -38,13 +38,28 @@ var player = new function() {
             this.ySpeed -= this.y - (p1 - 15);
             grounded = 1;
         }
+
+        if (playing || grounded && Math.abs(this.rot) > Math.PI * 0.05) {
+            playing = false;
+            this.rSpeed = 5;
+            Arrowup = 1;
+            this.x -= speed * 5;
+        }
+
         var angle = Math.atan2((p2 - 15) - this.y, (this.x + 5) - this.x);
         this.y += this.ySpeeed;
 
-        if (grounded) {
+        if (grounded && playing) {
             this.rot -= (this.rot - angle) * 0.5;
+            this.rSpeed = this.rSpeed - (angle - this.rot);
         }
-        ctx.rot = angle;
+
+        this.rSpeed += (k.ArrowLeft - k.ArrowRight) * 0.05;
+        this.rot -= this.rSpeed * 0.1;
+        if (this.rot > Math.PI) this.rot = -Math.PI;
+        if (this.rot < -Math.PI) this.rot = Math.PI;
+
+
         ctx.save();
         ctx.translate(this.x, this.y);
         ctx.rotate(this.rot);
@@ -58,9 +73,13 @@ var player = new function() {
 
 
 var t = 0;
+var speed = 0;
+var playing = true;
+var k = { ArrowUp: 0, ArrowDown: 0, ArrowLeft: 0, ArrowRight: 0 };
 
 function loop() {
-    t += 5;
+    speed -= (speed - (k.ArrowUp - k.ArrowDown)) * 0.1;
+    t += 10 * speed;
     ctx.fillStyle = "#19f";
     ctx.fillRect(0, 0, c.width, c.height);
 
@@ -79,3 +98,8 @@ function loop() {
 
 
 }
+
+onkeydown = d => k[d.key] = 1;
+onkeyup = d => k[d.key] = 0;
+
+loop();
