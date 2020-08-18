@@ -1,7 +1,7 @@
 var c = document.createElement("canvas");
 var ctx = c.getContext("2d");
-c.width = 720;
-c.height = 480;
+c.width = 800;
+c.height = 500;
 document.body.appendChild(c);
 
 var perm = [];
@@ -23,7 +23,7 @@ var Player = function() {
     this.rot = 0;
     this.rSpeed = 0;
     this.img = new Image();
-    this.img.src = "logo.jpg";
+    this.img.src = "images/logo.jpg";
     this.draw = function() {
         var p1 = c.height - noise(t + this.x) * 0.25;
         var p2 = c.height - noise(t + 5 + this.x) * 0.25;
@@ -59,7 +59,7 @@ var Player = function() {
         ctx.save();
         ctx.translate(this.x, this.y - 3);
         ctx.rotate(this.rot);
-        ctx.drawImage(this.img, -15, -15, 30, 30);
+        ctx.drawImage(this.img, -15, -15, 40, 30);
         ctx.restore();
     }
 }
@@ -113,5 +113,4 @@ function restart() {
 loop();
 
 var instructions = document.createElement("div");
-instructions.innerHTML += "[up] [down] = accelerate <br> [Left] [Rigth] = rotate";
 document.body.appendChild(instructions);
