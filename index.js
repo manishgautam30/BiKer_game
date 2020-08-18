@@ -32,7 +32,7 @@ var Player = new function() {
 
         var grounded = 0;
         if (p1 - 15 > this.y) {
-            this.ySpeed -= 0.1;
+            this.ySpeed += 0.1;
         } else {
             this.y = p1 - 15;
             this.ySpeed -= this.y - (p1 - 15);
