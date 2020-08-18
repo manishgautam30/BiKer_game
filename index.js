@@ -17,12 +17,12 @@ var noise = x => {
 }
 
 
-var player = new function() {
+var Player = new function() {
     this.x = c.width / 2;
     this.y = 0;
     this.ySpeed = 0;
     this.rot = 0;
-    this.rotSpeed = 0;
+    this.rSpeed = 0;
 
     this.img = new Image();
     this.img.src = "logo.jpg";
@@ -56,8 +56,14 @@ var player = new function() {
 
         this.rSpeed += (k.ArrowLeft - k.ArrowRight) * 0.05;
         this.rot -= this.rSpeed * 0.1;
-        if (this.rot > Math.PI) this.rot = -Math.PI;
-        if (this.rot < -Math.PI) this.rot = Math.PI;
+        if (this.rot > Math.PI) {
+            this.rot = -Math.PI;
+        }
+
+        if (this.rot < -Math.PI) {
+
+            this.rot = Math.PI;
+        }
 
 
         ctx.save();
