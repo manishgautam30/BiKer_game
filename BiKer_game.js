@@ -1,7 +1,7 @@
 var c = document.createElement("canvas");
 var ctx = c.getContext("2d");
 c.width = 800;
-c.height = 500;
+c.height = 515;
 document.body.appendChild(c);
 
 var perm = [];
@@ -72,7 +72,7 @@ var k = { ArrowUp: 0, ArrowDown: 0, ArrowLeft: 0, ArrowRight: 0 };
 
 function loop() {
     speed -= (speed - (k.ArrowUp - k.ArrowDown)) * 0.01;
-    t += 10 * speed;
+    t += 8 * speed;
     ctx.fillStyle = "#19f";
     ctx.fillRect(0, 0, c.width, c.height);
 
